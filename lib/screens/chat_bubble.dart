@@ -11,7 +11,7 @@ Singlechat message;
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: (message.isSend!)?Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(constraints: BoxConstraints(
         maxWidth: MediaQuery.of(context).size.width-150,
         
@@ -23,21 +23,21 @@ child: Stack(
   children: [
    Padding(
      padding: const EdgeInsets.only(left: 5,right: 45,bottom: 20),
-     child: Text(message.message),
+     child: Text(message.message!),
    ) ,
    Positioned(
     top: 14,
     right: 3,
     child: Row(
      children: [
-       Text(message.sendAt,
+       Text(message.sendAt!,
        style: TextStyle(
         fontSize: 10,
        ),),
-       (message.isSend)?
+       (message.isSend!)?
        Icon(Icons.done_all,
        size: 13,
-       color: (message.isReaded) ?Colors.blue : Colors.grey,)
+       color: (message.isReaded!) ?Colors.blue : Colors.grey,)
        : Container(),
      ],
    ))

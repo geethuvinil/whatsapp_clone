@@ -9,16 +9,16 @@ Singlechat singlechatFromJson(String str) => Singlechat.fromJson(json.decode(str
 String singlechatToJson(Singlechat data) => json.encode(data.toJson());
 
 class Singlechat {
-    bool isSend;
-    bool isReaded;
-    String message;
-    String sendAt;
+    bool? isSend;
+    bool? isReaded;
+    String? message;
+    String? sendAt;
 
     Singlechat({
-        required this.isSend,
-        required this.isReaded,
-        required this.message,
-        required this.sendAt,
+         this.isSend,
+         this.isReaded,
+         this.message,
+         this.sendAt,
     });
 
     factory Singlechat.fromJson(Map<String, dynamic> json) => Singlechat(
