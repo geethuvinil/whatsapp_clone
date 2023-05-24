@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/screens/calls_screen.dart';
 import 'package:whatsappclone/screens/chat_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,7 +69,7 @@ with SingleTickerProviderStateMixin {
         Text("Camera"),
       ChatPage(),
         Text("Status"),
-        Text("Calls"),
+CallsScreen()
       ],
       controller: _controller,
       ),

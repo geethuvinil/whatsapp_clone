@@ -1,3 +1,4 @@
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/models/chat_model.dart';
 import 'package:whatsappclone/models/singlechat.dart';
@@ -23,7 +24,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
   ];
   bool showSend = false;
   bool showEmoji = false;
- TextEditingController messageController = TextEditingController();
+  TextEditingController messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -114,27 +115,24 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                 Row(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width-100,
+                      width: MediaQuery.of(context).size.width - 100,
                       decoration: BoxDecoration(
- color: Colors.white,
- borderRadius: BorderRadius.circular(25),
-
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                     
                       child: TextField(
+                        keyboardType: TextInputType.text,
                         cursorColor: Colors.teal,
                         style: TextStyle(
-                          fontSize:20,
-
+                          fontSize: 20,
                         ),
                         controller: messageController,
                         onChanged: (value) {
-                          if(value.length>0){
+                          if (value.length > 0) {
                             setState(() {
-                              showSend =true;
+                              showSend = true;
                             });
-                          }
-                          else{
+                          } else {
                             setState(() {
                               showSend = false;
                             });
@@ -147,34 +145,147 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                         },
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
-                            onPressed: (){},
-                            icon: (showEmoji)?Icon(Icons.emoji_emotions_outlined):Icon(Icons.keyboard),
+                            onPressed: () {},
+                            icon: (showEmoji)
+                                ? const Icon(Icons.emoji_emotions_outlined)
+                                : const Icon(Icons.keyboard),
                           ),
                           border: InputBorder.none,
                           hintText: "type a message",
                           suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(onPressed: (){},
-                               icon: Icon(Icons.attach_file)),
-                               Icon(Icons.currency_rupee_rounded),
-                               UtilityWidget().widthSpace(10),
-                               Icon(Icons.camera_alt),
-                               UtilityWidget().widthSpace(15),
-
+                              IconButton(
+                                  onPressed: () => showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) => bottomMenu(),
+                                      ),
+                                  icon: const Icon(Icons.attach_file)),
+                              const Icon(Icons.currency_rupee_rounded),
+                              UtilityWidget().widthSpace(10),
+                              const Icon(Icons.camera_alt),
+                              UtilityWidget().widthSpace(15),
                             ],
                           ),
-
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          setState(() {
+                            messageList.add(Singlechat(
+                                isReaded: true,
+                                isSend: true,
+                                message: messageController.text,
+                                sendAt: "3:36 PM"));
+                          });
+                          messageController.clear();
+                        },
+                        child: (showSend)
+                            ? const Icon(Icons.send)
+                            : const Icon(Icons.mic_rounded),
+                      ),
+                    ),
                   ],
+                ),
+                Offstage(
+                  offstage: showEmoji,
+                  child: SizedBox(
+                    height: 250,
+                    child: EmojiPicker(
+                      textEditingController: messageController,
+                      onEmojiSelected: (category, emoji) {
+                        setState(() {
+                          showSend = true;
+                        });
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Container bottomMenu() {
+    return Container(
+      width: 350,
+      height: 350,
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              menuIcon(
+                  text: "Document",
+                  icon: Icon(Icons.insert_drive_file,color: Colors.white,),
+                  color: Colors.indigo),
+              menuIcon(
+                  text: "Camera",
+                  icon: Icon(Icons.camera_alt,color: Colors.white,),
+                  color: Colors.pink),
+              menuIcon(
+                  text: "Gallery",
+                  icon: Icon(Icons.image,color: Colors.white,),
+                  color: Colors.purple)
+            ],
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+                menuIcon(
+                  text: "Audio",
+                  icon: Icon(Icons.headphones,color: Colors.white,),
+                  color: Colors.orange),
+                   menuIcon(
+                  text: "Location",
+                  icon: Icon(Icons.location_on,color: Colors.white,),
+                  color: Colors.green.shade800),
+                   menuIcon(
+                  text: "Payment",
+                  icon: Icon(Icons.currency_rupee,color: Colors.white,),
+                  color: Colors.teal),
+
+            ],
+          ),Row(
+           
+            children: [
+              UtilityWidget().widthSpace(270),
+
+             menuIcon(
+                  text: "Contact",
+                  icon: Icon(Icons.person,color: Colors.white,),
+                  color: Colors.blue.shade800),
+                  UtilityWidget().widthSpace(280),
+                   menuIcon(
+                  text: "Poll",
+                  icon: Icon(Icons.poll_outlined,color: Colors.white,),
+                  color: Colors.teal)
+          ],)
+        ],
+      ),
+    );
+  }
+
+  Column menuIcon(
+      {required String text, required Icon icon, required Color color}) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 30,
+          backgroundColor: color,
+          child: icon,
+        ),
+        UtilityWidget().heightSpace(10),
+        Text(text),
+      ],
     );
   }
 }
