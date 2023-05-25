@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/models/calls_history.dart';
 import 'package:whatsappclone/widgets/utility_widget.dart';
 
-class CallsScreen extends StatelessWidget {
+class CallsScreen extends StatefulWidget {
    CallsScreen ({super.key});
+
+  @override
+  State<CallsScreen> createState() => _CallsScreenState();
+}
+
+class _CallsScreenState extends State<CallsScreen> {
     List<Callshistory> callHistory = [
     Callshistory(
       name: "CS Buddies",
@@ -54,6 +60,7 @@ appBar: AppBar(
     child: Icon(Icons.attach_file_rounded),),
   ),
   title: Column(
+    mainAxisAlignment: MainAxisAlignment.start,
     children: [
       Text("Create call link",
       style: TextStyle(
@@ -121,5 +128,4 @@ floatingActionButton: FloatingActionButton(onPressed: (){},
 child: Icon(Icons.add_ic_call_rounded),),
     );
   }
- 
 }

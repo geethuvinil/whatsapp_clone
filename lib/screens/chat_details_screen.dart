@@ -25,7 +25,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
   bool showSend = false;
   bool showEmoji = false;
   TextEditingController messageController = TextEditingController();
-
+   FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,11 +145,14 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                         },
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
-                            onPressed: () {},
-                            icon: (showEmoji)
-                                ? const Icon(Icons.emoji_emotions_outlined)
-                                : const Icon(Icons.keyboard),
-                          ),
+                              onPressed: () {
+                                setState(() {
+                                  showEmoji = !showEmoji;
+                                });
+                              },
+                              icon: (showEmoji)
+                                  ? const Icon(Icons.keyboard)
+                                  : const Icon(Icons.emoji_emotions_outlined)),
                           border: InputBorder.none,
                           hintText: "type a message",
                           suffixIcon: Row(
@@ -225,50 +228,73 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
             children: [
               menuIcon(
                   text: "Document",
-                  icon: Icon(Icons.insert_drive_file,color: Colors.white,),
+                  icon: Icon(
+                    Icons.insert_drive_file,
+                    color: Colors.white,
+                  ),
                   color: Colors.indigo),
               menuIcon(
                   text: "Camera",
-                  icon: Icon(Icons.camera_alt,color: Colors.white,),
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: Colors.white,
+                  ),
                   color: Colors.pink),
               menuIcon(
                   text: "Gallery",
-                  icon: Icon(Icons.image,color: Colors.white,),
+                  icon: Icon(
+                    Icons.image,
+                    color: Colors.white,
+                  ),
                   color: Colors.purple)
             ],
           ),
           Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-                menuIcon(
+              menuIcon(
                   text: "Audio",
-                  icon: Icon(Icons.headphones,color: Colors.white,),
+                  icon: Icon(
+                    Icons.headphones,
+                    color: Colors.white,
+                  ),
                   color: Colors.orange),
-                   menuIcon(
+              menuIcon(
                   text: "Location",
-                  icon: Icon(Icons.location_on,color: Colors.white,),
+                  icon: Icon(
+                    Icons.location_on,
+                    color: Colors.white,
+                  ),
                   color: Colors.green.shade800),
-                   menuIcon(
+              menuIcon(
                   text: "Payment",
-                  icon: Icon(Icons.currency_rupee,color: Colors.white,),
+                  icon: Icon(
+                    Icons.currency_rupee,
+                    color: Colors.white,
+                  ),
                   color: Colors.teal),
-
             ],
-          ),Row(
-           
+          ),
+          Row(
             children: [
               UtilityWidget().widthSpace(270),
-
-             menuIcon(
+              menuIcon(
                   text: "Contact",
-                  icon: Icon(Icons.person,color: Colors.white,),
+                  icon: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
                   color: Colors.blue.shade800),
-                  UtilityWidget().widthSpace(280),
-                   menuIcon(
+              UtilityWidget().widthSpace(280),
+              menuIcon(
                   text: "Poll",
-                  icon: Icon(Icons.poll_outlined,color: Colors.white,),
+                  icon: Icon(
+                    Icons.poll_outlined,
+                    color: Colors.white,
+                  ),
                   color: Colors.teal)
-          ],)
+            ],
+          )
         ],
       ),
     );
