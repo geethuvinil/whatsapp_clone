@@ -69,7 +69,7 @@ with SingleTickerProviderStateMixin {
         Text("Camera"),
       ChatPage(),
         Text("Status"),
-CallsScreen()
+CallsScreen(),
       ],
       controller: _controller,
       ),

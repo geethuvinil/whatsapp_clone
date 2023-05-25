@@ -9,6 +9,7 @@ Callshistory callshistoryFromJson(String str) => Callshistory.fromJson(json.deco
 String callshistoryToJson(Callshistory data) => json.encode(data.toJson());
 
 class Callshistory {
+  String name;
     String image;
     bool isIncoming;
     bool isGroupCall;
@@ -18,6 +19,7 @@ class Callshistory {
 
     Callshistory({
         required this.image,
+        required this.name,
         required this.isIncoming,
         required this.isGroupCall,
         required this.calledDay,
@@ -27,6 +29,7 @@ class Callshistory {
 
     factory Callshistory.fromJson(Map<String, dynamic> json) => Callshistory(
         image: json["image"],
+        name: json["name"],
         isIncoming: json["isIncoming"],
         isGroupCall: json["isGroupCall"],
         calledDay: json["calledDay"],
