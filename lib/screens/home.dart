@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/screens/call.dart';
 import 'package:whatsappclone/screens/calls_screen.dart';
+import 'package:whatsappclone/screens/camera.dart';
 import 'package:whatsappclone/screens/chat_page.dart';
 import 'package:whatsappclone/screens/status_page.dart';
 
@@ -68,7 +69,8 @@ with SingleTickerProviderStateMixin {
       
         title: Text("Whatsapp"),
       ),body: TabBarView(children: [
-        Text("Camera"),
+
+Camera(),
       ChatPage(),
      StatusPage(),
 // CallsScreen(),
