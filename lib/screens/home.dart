@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/screens/call.dart';
 import 'package:whatsappclone/screens/calls_screen.dart';
 import 'package:whatsappclone/screens/chat_page.dart';
+import 'package:whatsappclone/screens/status_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,7 +70,7 @@ with SingleTickerProviderStateMixin {
       ),body: TabBarView(children: [
         Text("Camera"),
       ChatPage(),
-        Text("Status"),
+     StatusPage(),
 // CallsScreen(),
 Call()
       ],
