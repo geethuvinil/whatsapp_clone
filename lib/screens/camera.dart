@@ -50,9 +50,13 @@ class _CameraState extends State<Camera> {
                 InkWell(
                   onTap: (){
                     setState(() {
-                      index = (index == 0 ) ? 1 :0;
-                      _cameraController = CameraController(cameras[index], ResolutionPreset.high);
+                      // index = (index == 0 ) ? 1 :0;
+                      if(index < cameras.length){
+                        index = (index+1)%cameras.length;
+  _cameraController = CameraController(cameras[index], ResolutionPreset.high);
                       CameraValue = _cameraController?.initialize();
+                      }
+                    
                     });
                   },
                   child: Icon(Icons.cameraswitch_outlined,size: 40,color: Colors.white,))
