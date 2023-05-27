@@ -12,6 +12,7 @@ class Chat {
     String? message;
     String? status;
     String? unread;
+    bool? isBackgroundImage;
 
     Chat({
          this.avatar,
@@ -20,7 +21,8 @@ class Chat {
          this.updatedAt,
          this.message,
          this.status,
-         this.unread
+         this.unread,
+         this.isBackgroundImage,
     });
 
     factory Chat.fromJson(Map<String, dynamic> json) => Chat(
@@ -30,7 +32,8 @@ class Chat {
         updatedAt: json["updatedAt"],
         message: json["message"],
         status: json['status'],
-        unread: json['unread']
+        unread: json['unread'],
+        isBackgroundImage:json["isBackgroundImage"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -41,5 +44,6 @@ class Chat {
         "message": message,
         'status':status,
         "unread":unread,
+        "isBackgroundImage":isBackgroundImage,
     };
 }
