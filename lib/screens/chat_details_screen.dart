@@ -74,12 +74,12 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                 PopupMenuItem(child: Text("Wallpaper")),
                 PopupMenuItem(
                     onTap: () {
-                      
+                      Container();
                     },
                     child: Row(
                       children: [
                         Text("More"),
-                        UtilityWidget().widthSpace(180),
+                        UtilityWidget().widthSpace(185),
                         Icon(
                           Icons.arrow_right,
                           color: Colors.black,
